@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.example.auction_platform.repository.account.entity.Account;
+import org.example.auction_platform.repository.listing.entity.visitor.ListingVisitor;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -18,4 +19,6 @@ public abstract class Listing {
     protected String itemName;
     @ManyToOne
     protected Account listingCreator;
+
+    public abstract <R> R accept(ListingVisitor<R> visitor);
 }

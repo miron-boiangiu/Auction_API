@@ -5,6 +5,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.example.auction_platform.repository.account.entity.Account;
+import org.example.auction_platform.repository.listing.entity.visitor.ListingVisitor;
 
 @Entity
 @SuperBuilder
@@ -15,4 +16,10 @@ import org.example.auction_platform.repository.account.entity.Account;
 public class FinishedListing extends Listing {
     @ManyToOne
     private Account biddingWinner;
+
+    @Override
+    public <R> R accept(ListingVisitor<R> visitor) {
+        // "I am an OngoingListing, so I call the ongoing method"
+        return visitor.visit(this);
+    }
 }

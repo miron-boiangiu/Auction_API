@@ -8,8 +8,11 @@ import org.example.auction_platform.repository.account.AccountRepository;
 import org.example.auction_platform.repository.account.entity.Account;
 import org.example.auction_platform.repository.listing.FinishedListingRepository;
 import org.example.auction_platform.repository.listing.OngoingListingRepository;
+import org.example.auction_platform.repository.listing.entity.Listing;
 import org.example.auction_platform.repository.listing.entity.OngoingListing;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -19,7 +22,7 @@ public class ListingService {
     private FinishedListingRepository finishedListingRepository;
     private OngoingListingRepository ongoingListingRepository;
 
-    public void createNewListing(@NonNull String creatorEmail,
+    public Listing createNewListing(@NonNull String creatorEmail,
                                  long startingPrice,
                                  String itemName) {
 
@@ -35,6 +38,12 @@ public class ListingService {
                 .listingCreator(listingCreator)
                 .build();
 
-        ongoingListingRepository.save(newListing);
+        return ongoingListingRepository.save(newListing);
+    }
+
+    public Optional<Listing> getListing(long listingId) {
+        return ongoingListingRepository.findById(listingId)
+                .map(Listing.class::cast)
+                .or(() -> finishedListingRepository.findById(listingId).map(Listing.class::cast));
     }
 }
