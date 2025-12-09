@@ -1,10 +1,11 @@
 package org.example.auction_platform.repository.account.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+import org.example.auction_platform.repository.bid.entity.Bid;
+import org.example.auction_platform.repository.listing.entity.FinishedListing;
+import org.example.auction_platform.repository.listing.entity.Listing;
+import java.util.List;
 
 @Entity
 @Builder
@@ -19,4 +20,10 @@ public class Account {
     @Column(unique = true)
     private String email;
     private String name;
+    @OneToMany(mappedBy = "listingCreator")
+    private List<Listing> listings;
+    @OneToMany(mappedBy = "biddingWinner")
+    private List<FinishedListing> wonListings;
+    @OneToMany(mappedBy = "bidder")
+    private List<Bid> bids;
 }

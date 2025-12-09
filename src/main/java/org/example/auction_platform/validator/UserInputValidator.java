@@ -30,4 +30,12 @@ public class UserInputValidator {
 
         return true;
     }
+
+    public static boolean isValidItemName(String itemName) {
+        return true;  // Whatever
+    }
+
+    public static boolean isValidStartingValue(long startingValue) {
+        return startingValue >= 0;
+    }
 }
