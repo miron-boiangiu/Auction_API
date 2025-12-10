@@ -13,6 +13,7 @@ public class TestConstants {
     public static final long STARTING_PRICE = 100L;
     public static final String NAME = "NAME";
     public static final String EMAIL = "EMAIL@email.com";
+    public static final String WINNER_EMAIL = "ANOTHER_EMAIL@email.com";
     public static final Account ACCOUNT = Account.builder()
             .name(NAME)
             .email(EMAIL)

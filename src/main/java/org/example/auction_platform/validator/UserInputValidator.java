@@ -38,7 +38,15 @@ public class UserInputValidator {
     }
 
     public static boolean isValidItemName(String itemName) {
-        return true;  // Whatever
+        if (itemName == null) {
+            return false;
+        }
+
+        if (itemName.isEmpty()) {
+            return false;
+        }
+
+        return true;
     }
 
     public static boolean isValidValue(long startingValue) {
