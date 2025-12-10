@@ -25,6 +25,7 @@ public class GetListingMapper implements ListingVisitor<GetListingResponse> {
                 .startingPrice(listing.getStartingPrice())
                 .currentPrice(currentPrice)
                 .numberOfBids(listing.getBids().size())
+                .id(listing.getId())
                 .build();
     }
 
@@ -34,6 +35,7 @@ public class GetListingMapper implements ListingVisitor<GetListingResponse> {
                 .itemName(listing.getItemName())
                 .creatorEmail(listing.getListingCreator().getEmail())
                 .winnerEmail(listing.getBiddingWinner().getEmail())
+                .id(listing.getId())
                 .build();
     }
 }

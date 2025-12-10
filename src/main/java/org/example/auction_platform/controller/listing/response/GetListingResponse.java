@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder // Required for inheritance
 @NoArgsConstructor
 public class GetListingResponse {
+    private long id;
     private String itemName;
     private String creatorEmail;
 }

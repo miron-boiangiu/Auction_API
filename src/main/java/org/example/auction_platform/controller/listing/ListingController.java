@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/listing")
 @AllArgsConstructor
@@ -54,9 +56,25 @@ public class ListingController {
     @GetMapping("/{id}")
     public ResponseEntity<GetListingResponse> getListing(@PathVariable long id) {
 
-        return listingService.getListing(id) // Returns Optional<Listing>
-                .map(listing -> listing.accept(getListingMapper)) // Polymorphic dispatch!
+        return listingService.getListing(id)
+                .map(listing -> listing.accept(getListingMapper))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping
+    public List<GetListingResponse> getOngoingListings() {
+
+        return listingService.getOngoingListings().stream()
+                .map(getListingMapper::visit)
+                .toList();
+    }
+
+    @PostMapping("/{id}/end")  // TODO: same as with other places, this has no security
+    public void endListing(
+            @PathVariable long id
+    ) {
+
+        listingService.endListing(id);
     }
 }
