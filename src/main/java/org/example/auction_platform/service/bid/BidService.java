@@ -11,6 +11,8 @@ import org.example.auction_platform.repository.listing.OngoingListingRepository;
 import org.example.auction_platform.repository.listing.entity.OngoingListing;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class BidService {
@@ -48,5 +50,16 @@ public class BidService {
                 .build();
 
         bidRepository.save(newBid);
+    }
+
+    public List<Bid> getBids(long listingId) {
+
+        OngoingListing listing = ongoingListingRepository.findById(listingId).orElse(null);
+
+        if (listing == null) {
+            throw new EntryNotFoundException("Listing not found.");
+        }
+
+        return listing.getBids();
     }
 }

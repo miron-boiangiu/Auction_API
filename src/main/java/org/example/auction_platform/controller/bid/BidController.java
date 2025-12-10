@@ -1,20 +1,25 @@
 package org.example.auction_platform.controller.bid;
 
 import lombok.AllArgsConstructor;
+import org.example.auction_platform.controller.bid.mapper.BidMapper;
 import org.example.auction_platform.controller.bid.request.AddBidRequest;
+import org.example.auction_platform.controller.bid.response.BidResponse;
 import org.example.auction_platform.exception.UserInvalidInputException;
 import org.example.auction_platform.service.bid.BidService;
 import org.example.auction_platform.validator.UserInputValidator;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping("/listing/{listingId}")
 @AllArgsConstructor
 public class BidController {
 
     private BidService bidService;
+
+    private BidMapper mapper;
 
     @PostMapping("/bid")
     @ResponseStatus(HttpStatus.CREATED)
@@ -36,5 +41,13 @@ public class BidController {
                 request.getValue(),
                 listingId
         );
+    }
+
+    @GetMapping("/bid")
+    public List<BidResponse> getBids(  // TODO: this should be paginated or sth
+                                       @PathVariable long listingId
+    ) {
+
+        return bidService.getBids(listingId).stream().map(mapper::entityToResponse).toList();
     }
 }
