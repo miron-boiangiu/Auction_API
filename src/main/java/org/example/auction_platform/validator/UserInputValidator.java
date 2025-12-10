@@ -1,7 +1,9 @@
 package org.example.auction_platform.validator;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public class UserInputValidator {
-    private UserInputValidator() {}
 
     public static boolean isValidId(String id) {
         return id.matches("\\d+");

@@ -7,6 +7,7 @@ import org.example.auction_platform.controller.bid.response.BidResponse;
 import org.example.auction_platform.exception.UserInvalidInputException;
 import org.example.auction_platform.service.bid.BidService;
 import org.example.auction_platform.validator.UserInputValidator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
