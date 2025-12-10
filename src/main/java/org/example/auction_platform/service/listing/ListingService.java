@@ -54,6 +54,10 @@ public class ListingService {
         return ongoingListingRepository.findAll();
     }
 
+    public List<FinishedListing> getFinishedListings() {
+        return finishedListingRepository.findAll();
+    }
+
     @Transactional
     public void endListing(long listingId) {
 

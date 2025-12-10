@@ -8,6 +8,8 @@ import org.example.auction_platform.repository.listing.entity.OngoingListing;
 import org.example.auction_platform.repository.listing.entity.visitor.ListingVisitor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class GetListingMapper implements ListingVisitor<GetListingResponse> {
 
@@ -34,7 +36,7 @@ public class GetListingMapper implements ListingVisitor<GetListingResponse> {
         return GetFinishedListingResponse.builder()
                 .itemName(listing.getItemName())
                 .creatorEmail(listing.getListingCreator().getEmail())
-                .winnerEmail(listing.getBiddingWinner().getEmail())
+                .winnerEmail(Optional.ofNullable(listing.getBiddingWinner()).map((a) -> a.getEmail()).orElse(null))
                 .id(listing.getId())
                 .build();
     }

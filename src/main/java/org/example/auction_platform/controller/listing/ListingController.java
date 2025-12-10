@@ -77,4 +77,12 @@ public class ListingController {
 
         listingService.endListing(id);
     }
+
+    @GetMapping("/old")
+    public List<GetListingResponse> getFinishedListings() {
+
+        return listingService.getFinishedListings().stream()
+                .map(getListingMapper::visit)
+                .toList();
+    }
 }

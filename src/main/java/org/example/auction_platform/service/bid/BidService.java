@@ -23,6 +23,8 @@ public class BidService {
 
     public void addBid(String email, long value, long listingId) {
 
+        // TODO: you shouldn't be able to bid on your own listing
+
         Account account = accountRepository.findByEmail(email);
 
         if (account == null) {
