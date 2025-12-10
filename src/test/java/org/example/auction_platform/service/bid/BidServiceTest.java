@@ -8,10 +8,12 @@ import org.example.auction_platform.repository.bid.BidRepository;
 import org.example.auction_platform.repository.bid.entity.Bid;
 import org.example.auction_platform.repository.listing.OngoingListingRepository;
 import org.example.auction_platform.repository.listing.entity.OngoingListing;
+import org.example.auction_platform.service.bid.async_fetcher.AsyncFetcher;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
@@ -34,6 +36,9 @@ class BidServiceTest {
 
     @Mock
     private OngoingListingRepository ongoingListingRepository;
+
+    @Spy
+    private AsyncFetcher asyncFetcher;
 
     @InjectMocks
     private BidService bidService;
