@@ -19,7 +19,7 @@ public class FinishedListing extends Listing {
 
     @Override
     public <R> R accept(ListingVisitor<R> visitor) {
-        // "I am an OngoingListing, so I call the ongoing method"
+
         return visitor.visit(this);
     }
 }

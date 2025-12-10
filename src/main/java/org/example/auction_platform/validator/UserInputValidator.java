@@ -3,6 +3,10 @@ package org.example.auction_platform.validator;
 public class UserInputValidator {
     private UserInputValidator() {}
 
+    public static boolean isValidId(String id) {
+        return id.matches("\\d+");
+    }
+
     public static boolean isValidEmail(String email) {  // TODO: use regexes
         if (email == null) {
             return false;
@@ -35,7 +39,7 @@ public class UserInputValidator {
         return true;  // Whatever
     }
 
-    public static boolean isValidStartingValue(long startingValue) {
+    public static boolean isValidValue(long startingValue) {
         return startingValue >= 0;
     }
 }

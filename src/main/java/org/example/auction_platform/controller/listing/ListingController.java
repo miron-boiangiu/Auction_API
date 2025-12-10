@@ -1,7 +1,6 @@
 package org.example.auction_platform.controller.listing;
 
 import lombok.AllArgsConstructor;
-import org.apache.catalina.User;
 import org.example.auction_platform.controller.listing.mapper.GetListingMapper;
 import org.example.auction_platform.controller.listing.request.CreateListingRequest;
 import org.example.auction_platform.controller.listing.response.CreateListingResponse;
@@ -26,7 +25,7 @@ public class ListingController {
     @PostMapping
     public ResponseEntity<CreateListingResponse> createNewListing(@RequestBody CreateListingRequest request) {
 
-        if(!UserInputValidator.isValidStartingValue(request.getStartingValue())) {
+        if(!UserInputValidator.isValidValue(request.getStartingValue())) {
             throw new UserInvalidInputException("Invalid starting value.");
         }
 
@@ -54,6 +53,7 @@ public class ListingController {
 
     @GetMapping("/{id}")
     public ResponseEntity<GetListingResponse> getListing(@PathVariable long id) {
+
         return listingService.getListing(id) // Returns Optional<Listing>
                 .map(listing -> listing.accept(getListingMapper)) // Polymorphic dispatch!
                 .map(ResponseEntity::ok)

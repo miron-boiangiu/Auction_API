@@ -2,7 +2,6 @@ package org.example.auction_platform.service.listing;
 
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
-import org.example.auction_platform.exception.AccountExistsException;
 import org.example.auction_platform.exception.UserInvalidInputException;
 import org.example.auction_platform.repository.account.AccountRepository;
 import org.example.auction_platform.repository.account.entity.Account;
